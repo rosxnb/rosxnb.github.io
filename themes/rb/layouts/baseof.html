@@ -14,7 +14,7 @@
     {{ block "main" . }}{{ end }}
 
     <footer class="site-footer">
-      <span>© {{ now.Year }} {{ site.Params.author }}. Built with Hugo.</span>
+      <span>© {{ now.Year }} {{ site.Params.author }}.</span>
       <ul class="footer__links">
         {{ with site.Params.github }}<li><a href="{{ . }}" target="_blank" rel="noopener">GitHub</a></li>{{ end }}
         {{ with site.Params.linkedin }}<li><a href="{{ . }}" target="_blank" rel="noopener">LinkedIn</a></li>{{ end }}
