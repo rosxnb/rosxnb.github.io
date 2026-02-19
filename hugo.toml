@@ -52,14 +52,14 @@ ignoreLogs = [
         url = "/notes/"
         weight = 1
     [[menu.main]]
-        name = "Cpp"
-        url = "/cpp/"
+        name = "Explore"
+        url = "/explore/"
         weight = 2
-    [[menu.main]]
-        name = "Research"
-        url = "/research/"
-        weight = 3
     [[menu.main]]
         name = "Projects"
         url = "/projects/"
+        weight = 3
+    [[menu.main]]
+        name = "Research"
+        url = "/research/"
         weight = 4

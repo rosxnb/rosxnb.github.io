@@ -446,3 +446,7 @@
   border-radius: 100px;
   color: var(--text-tertiary);
 }
+
+.fig--small  { max-width: 400px; margin: $space-6 auto; }
+.fig--medium { max-width: 600px; margin: $space-6 auto; }
+.fig--full   { max-width: 100%; }

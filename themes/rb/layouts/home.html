@@ -29,19 +29,23 @@
 
     {{/* Content section cards */}}
     <div class="home-sections">
-      {{ range site.Sections }}
+      {{ range site.Sections.ByWeight }}
       <a href="{{ .RelPermalink }}" class="section-card">
         <div class="section-card__icon">
-          {{ if eq .Section "notes" }}📚
-          {{ else if eq .Section "cpp" }}⚙️
-          {{ else if eq .Section "research" }}🔬
-          {{ else if eq .Section "projects" }}🛠️
-          {{ else }}📄
-          {{ end }}
+          {{ .Params.icon | default "📄"}}
         </div>
         <div class="section-card__title">{{ .LinkTitle }}</div>
         <div class="section-card__desc">{{ .Description | default .Summary }}</div>
-        <div class="section-card__count">{{ len .Pages }} {{ if eq (len .Pages) 1 }}post{{ else }}posts{{ end }}</div>
+        <div class="section-card__count">
+          {{ $count := len .Pages }}
+          {{ $label := .Params.contentLabel | default "posts" }}
+          {{ $count }}
+          {{ if eq $count 1 }}
+            {{ substr $label 0 -1 }}
+          {{ else }}
+            {{ $label }}
+          {{ end }}
+        </div>
       </a>
       {{ end }}
     </div>

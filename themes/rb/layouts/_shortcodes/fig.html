@@ -1,7 +1,14 @@
+{{/*
+Usage: {{< fig src="image.png" alt="skipable" caption="skipable" class="has 3 options" >}}
+
+class: fig--small, fig--medium, fig--full (_content.scss)
+*/}}
+
 {{- $src := .Get "src" -}}
 {{- $alt := .Get "alt" | default "" -}}
 {{- $caption := .Get "caption" | default "" -}}
 {{- $class := .Get "class" | default "" -}}
+
 <figure{{ with $class }} class="{{ . }}"{{ end }}>
   <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy">
   {{ with $caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
