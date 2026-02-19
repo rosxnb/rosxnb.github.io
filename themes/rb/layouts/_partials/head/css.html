@@ -1,0 +1,24 @@
+{{- $scss := resources.Get "scss/main.scss" -}}
+{{- if not $scss -}}
+  {{- errorf "SCSS file not found: scss/main.scss" -}}
+{{- end -}}
+
+{{- $options := dict
+  "transpiler" "dartsass"
+  "targetPath" "css/main.css"
+  "outputStyle" (cond hugo.IsDevelopment "expanded" "compressed")
+  "enableSourceMap" hugo.IsDevelopment
+  "silenceDeprecations" (slice "import")
+-}}
+
+{{- $style := $scss | css.Sass $options -}}
+
+{{- if hugo.IsDevelopment -}}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+{{- else -}}
+  {{- $fingerprinted := $style | fingerprint -}}
+  <link rel="stylesheet"
+        href="{{ $fingerprinted.RelPermalink }}"
+        integrity="{{ $fingerprinted.Data.Integrity }}"
+        crossorigin="anonymous">
+{{- end -}}

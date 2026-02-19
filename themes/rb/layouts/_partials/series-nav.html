@@ -1,0 +1,45 @@
+{{/*
+Renders a series navigation block showing all posts in the series
+with progress indication and current post highlighted.
+@context page The current page
+*/}}
+{{- $page := . -}}
+{{- $seriesTerms := $page.GetTerms "series" -}}
+{{- with $seriesTerms -}}
+  {{- $series := index . 0 -}}
+  {{- $seriesPages := $series.Pages.ByDate -}}
+  {{- $total := len $seriesPages -}}
+  {{- $current := 0 -}}
+  {{- range $i, $p := $seriesPages -}}
+    {{- if eq $p.RelPermalink $page.RelPermalink -}}
+      {{- $current = add $i 1 -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $pct := mul (div (float $current) (float $total)) 100 -}}
+
+<div class="series-nav">
+  <div class="series-nav__header">
+    <span class="series-nav__label">Series</span>
+    <a href="{{ $series.RelPermalink }}" class="series-nav__name">{{ $series.LinkTitle }}</a>
+  </div>
+
+  <div class="series-progress">
+    <div class="series-progress__label">Part {{ $current }} of {{ $total }}</div>
+    <div class="series-progress__bar">
+      <div class="series-progress__fill" style="width: {{ printf "%.0f" $pct }}%"></div>
+    </div>
+  </div>
+
+  <ol class="series-nav__list">
+    {{- range $i, $p := $seriesPages -}}
+    <li class="series-nav__item">
+      <span class="series-nav__num">{{ add $i 1 }}</span>
+      <a href="{{ $p.RelPermalink }}"
+         class="series-nav__link{{ if eq $p.RelPermalink $page.RelPermalink }} current{{ end }}">
+        {{ $p.LinkTitle }}
+      </a>
+    </li>
+    {{- end -}}
+  </ol>
+</div>
+{{- end -}}

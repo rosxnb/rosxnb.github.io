@@ -1,0 +1,65 @@
+baseURL = "https://rosxnb.github.io/"
+languageCode = "en-us"
+title = "Roshan Bharati"
+theme = "rb"
+
+ignoreLogs = [
+    'warning-home-page-is-leaf-bundle'
+]
+
+[params]
+    description = "Low Level Performance Oriented System Engineer | AI Researcher"
+    author = "Roshan Bharati"
+    username = "rosxnb"
+    github = "https://github.com/rosxnb"
+    linkedin = "https://linkedin.com/in/rosxnb"
+    email = "rosxnb@gmail.com"
+
+[params.math]
+    enable = true
+
+[params.mermaid]
+    enable = true
+
+[taxonomies]
+    tag = "tags"
+    category = "categories"
+    series = "series"
+
+[markup]
+    [markup.goldmark]
+        [markup.goldmark.renderer]
+            unsafe = true   # Allow raw HTML in markdown (needed for KaTeX, etc.)
+        [markup.goldmark.extensions.passthrough]
+            enable = true
+            [markup.goldmark.extensions.passthrough.delimiters]
+                block  = [["$$", "$$"], ["\\[", "\\]"]]
+                inline = [["$", "$"],   ["\\(", "\\)"]]
+    [markup.highlight]
+        noClasses = false   # Use CSS classes (not inline styles) for Chroma
+        lineNos = false
+        codeFences = true
+        guessSyntax = true
+        tabWidth = 4
+    [markup.tableOfContents]
+        startLevel = 2
+        endLevel = 4
+        ordered = false
+
+[menu]
+    [[menu.main]]
+        name = "Notes"
+        url = "/notes/"
+        weight = 1
+    [[menu.main]]
+        name = "Cpp"
+        url = "/cpp/"
+        weight = 2
+    [[menu.main]]
+        name = "Research"
+        url = "/research/"
+        weight = 3
+    [[menu.main]]
+        name = "Projects"
+        url = "/projects/"
+        weight = 4

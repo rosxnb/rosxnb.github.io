@@ -1,0 +1,89 @@
+// ─── Right-side Table of Contents ─────────────────────────────────────────────
+.toc {
+  padding-top: $space-2;
+}
+
+.toc__title {
+  font-size: $font-size-xs;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+  margin-bottom: $space-3;
+}
+
+.toc__nav {
+  nav {
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      margin: 0;
+    }
+
+    // Level 1 (H2)
+    > ul > li > a {
+      display: block;
+      padding: 4px $space-3;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      border-left: 2px solid var(--border);
+      transition: color 0.15s, border-color 0.15s;
+      line-height: 1.4;
+
+      &:hover {
+        color: var(--text);
+        border-color: var(--text-tertiary);
+        text-decoration: none;
+      }
+
+      &.active {
+        color: var(--accent);
+        border-color: var(--accent);
+        font-weight: 500;
+      }
+    }
+
+    // Level 2 (H3) — indented
+    > ul > li > ul > li > a {
+      display: block;
+      padding: 3px $space-3 3px calc(#{$space-3} + 12px);
+      font-size: 12px;
+      color: var(--text-tertiary);
+      border-left: 2px solid var(--border);
+      transition: color 0.15s;
+
+      &:hover {
+        color: var(--text);
+        text-decoration: none;
+      }
+
+      &.active {
+        color: var(--accent);
+        font-weight: 500;
+      }
+    }
+
+    // Hide deeper nesting
+    ul ul ul { display: none; }
+  }
+}
+
+.toc__progress {
+  margin-top: $space-4;
+  height: 2px;
+  background-color: var(--border);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.toc__progress-bar {
+  height: 100%;
+  background-color: var(--accent);
+  border-radius: 100px;
+  width: 0%;
+  transition: width 0.1s;
+}

@@ -1,0 +1,155 @@
+// ─── Series navigation ─────────────────────────────────────────────────────────
+.series-nav {
+  margin: $space-8 0;
+  padding: $space-5 $space-6;
+  border: 1px solid var(--border);
+  border-radius: $radius-lg;
+  background-color: var(--bg-secondary);
+}
+
+.series-nav__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $space-4;
+  gap: $space-3;
+}
+
+.series-nav__label {
+  font-size: $font-size-xs;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+}
+
+.series-nav__name {
+  font-size: $font-size-sm;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+// Progress bar
+.series-progress {
+  margin-bottom: $space-5;
+}
+
+.series-progress__bar {
+  height: 3px;
+  background-color: var(--border);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-top: $space-2;
+}
+
+.series-progress__fill {
+  height: 100%;
+  background-color: var(--series-bar);
+  border-radius: 100px;
+  transition: width 0.3s ease;
+}
+
+.series-progress__label {
+  font-size: $font-size-xs;
+  color: var(--text-tertiary);
+  font-family: $font-mono;
+}
+
+// Posts list
+.series-nav__list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.series-nav__item {
+  display: flex;
+  align-items: baseline;
+  gap: $space-3;
+  margin: 0;
+}
+
+.series-nav__num {
+  font-size: $font-size-xs;
+  font-family: $font-mono;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  min-width: 20px;
+}
+
+.series-nav__link {
+  font-size: $font-size-sm;
+  color: var(--text-secondary);
+  padding: $space-1 $space-2;
+  border-radius: $radius-sm;
+  display: block;
+  transition: background-color 0.15s, color 0.15s;
+
+  &:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  &.current {
+    color: var(--accent);
+    font-weight: 500;
+    background-color: var(--accent-muted);
+  }
+
+  &.current::before {
+    content: "▶ ";
+    font-size: 9px;
+    vertical-align: 1px;
+  }
+}
+
+// ─── Series nav at article bottom ─────────────────────────────────────────────
+.article-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+  margin-top: $space-8;
+
+  @media (max-width: $bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.article-nav__prev,
+.article-nav__next {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  padding: $space-4 $space-5;
+  border: 1px solid var(--border);
+  border-radius: $radius-md;
+  transition: border-color 0.15s, box-shadow 0.15s;
+
+  &:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-sm);
+    text-decoration: none;
+  }
+}
+
+.article-nav__next {
+  text-align: right;
+}
+
+.article-nav__dir {
+  font-size: $font-size-xs;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+
+.article-nav__title {
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.4;
+}

@@ -1,0 +1,13 @@
+// ─── RB Theme ─────────────────────────────────────────────────────────────────
+// Using @import so SCSS variables are globally available across all partials.
+// (dart-sass deprecation warnings for @import are silenced in the Hugo config)
+
+@import "variables";
+@import "reset";
+@import "layout";
+@import "header";
+@import "content";
+@import "code";
+@import "toc";
+@import "series";
+@import "callouts";

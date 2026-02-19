@@ -1,0 +1,22 @@
+{{ define "main" }}
+<div class="layout layout--full">
+  <main class="main-content">
+    <div class="section-header">
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+    </div>
+
+    <div class="post-list">
+      {{ range .Pages.ByDate.Reverse }}
+      <a href="{{ .RelPermalink }}" class="post-card">
+        <div>
+          <div class="post-card__title">{{ .LinkTitle }}</div>
+          {{ with .Summary }}<div class="post-card__summary">{{ . | truncate 110 }}</div>{{ end }}
+        </div>
+        <div class="post-card__date">{{ .Date | time.Format "Jan 2006" }}</div>
+      </a>
+      {{ end }}
+    </div>
+  </main>
+</div>
+{{ end }}

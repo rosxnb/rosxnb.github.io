@@ -1,0 +1,17 @@
+{{/*
+Renders the right-side Table of Contents for a single page.
+@context page The current page
+*/}}
+{{ with .TableOfContents }}
+<aside class="toc-aside" aria-label="Table of contents">
+  <div class="toc">
+    <div class="toc__title">On this page</div>
+    <div class="toc__nav" id="tocNav">
+      {{ . }}
+    </div>
+    <div class="toc__progress" aria-hidden="true">
+      <div class="toc__progress-bar" id="tocProgressBar"></div>
+    </div>
+  </div>
+</aside>
+{{ end }}

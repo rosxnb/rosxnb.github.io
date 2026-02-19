@@ -1,0 +1,24 @@
+{{/*
+Usage: {{< callout type="note" title="Optional title" >}}
+Body text here.
+{{< /callout >}}
+
+Types: note, tip, warning, danger
+*/}}
+{{- $type := .Get "type" | default "note" -}}
+{{- $title := .Get "title" -}}
+
+{{- $icons := dict
+  "note"    "ℹ️"
+  "tip"     "💡"
+  "warning" "⚠️"
+  "danger"  "🚨"
+-}}
+
+<div class="callout callout--{{ $type }}" role="note">
+  <div class="callout__icon" aria-hidden="true">{{ index $icons $type }}</div>
+  <div class="callout__body">
+    {{- with $title -}}<div class="callout__title">{{ . }}</div>{{- end -}}
+    {{ .Inner | markdownify }}
+  </div>
+</div>

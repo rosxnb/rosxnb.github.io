@@ -1,0 +1,157 @@
+// ─── Site header ───────────────────────────────────────────────────────────────
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $header-height;
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--border);
+  z-index: 200;
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+
+  // Subtle transparency for the blur effect
+  background-color: rgba(255,255,255,0.85);
+  [data-theme="dark"] & {
+    background-color: rgba(10,10,10,0.85);
+  }
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: $page-max;
+  margin: 0 auto;
+  padding: 0 $space-6;
+  gap: $space-4;
+}
+
+// ─── Logo / site title ─────────────────────────────────────────────────────────
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  flex-shrink: 0;
+  text-decoration: none;
+
+  &:hover { text-decoration: none; }
+}
+
+.site-logo__name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  font-family: $font-mono;
+}
+
+.site-logo__dot {
+  color: var(--accent);
+}
+
+// ─── Main nav ──────────────────────────────────────────────────────────────────
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+
+  @media (max-width: $bp-sm) {
+    display: none;
+  }
+}
+
+.main-nav__link {
+  display: block;
+  padding: $space-1 $space-3;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: $radius-sm;
+  transition: background-color 0.15s, color 0.15s;
+
+  &:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  &.active {
+    color: var(--accent);
+    background-color: var(--accent-muted);
+  }
+}
+
+// ─── Header right controls ─────────────────────────────────────────────────────
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  flex-shrink: 0;
+}
+
+// ─── Theme toggle button ───────────────────────────────────────────────────────
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: $radius-md;
+  background-color: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+
+  &:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  .icon-sun  { display: none; }
+  .icon-moon { display: block; }
+
+  [data-theme="dark"] & {
+    .icon-sun  { display: block; }
+    .icon-moon { display: none; }
+  }
+}
+
+// ─── Mobile menu button ────────────────────────────────────────────────────────
+.mobile-menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: $radius-md;
+  background-color: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color 0.15s;
+
+  &:hover { background-color: var(--bg-secondary); }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  @media (max-width: $bp-lg) {
+    display: flex;
+  }
+}

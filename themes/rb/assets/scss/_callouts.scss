@@ -1,0 +1,78 @@
+// ─── Callout / admonition blocks ──────────────────────────────────────────────
+.callout {
+  margin: $space-6 0;
+  padding: $space-4 $space-5;
+  border-radius: $radius-md;
+  border-left: 4px solid;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: $space-3;
+
+  &--note {
+    background-color: var(--callout-note);
+    border-color: var(--callout-note-border);
+    .callout__icon { color: var(--callout-note-border); }
+  }
+
+  &--tip {
+    background-color: var(--callout-tip);
+    border-color: var(--callout-tip-border);
+    .callout__icon { color: var(--callout-tip-border); }
+  }
+
+  &--warning {
+    background-color: var(--callout-warning);
+    border-color: var(--callout-warning-border);
+    .callout__icon { color: var(--callout-warning-border); }
+  }
+
+  &--danger {
+    background-color: var(--callout-danger);
+    border-color: var(--callout-danger-border);
+    .callout__icon { color: var(--callout-danger-border); }
+  }
+}
+
+.callout__icon {
+  font-size: 18px;
+  line-height: 1.6;
+  flex-shrink: 0;
+}
+
+.callout__body {
+  .callout__title {
+    font-weight: 600;
+    font-size: $font-size-sm;
+    margin-bottom: $space-1;
+    color: var(--text);
+  }
+
+  p {
+    font-size: $font-size-sm;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+    line-height: 1.55;
+
+    &:not(:last-child) { margin-bottom: $space-2; }
+  }
+
+  code:not(pre code) {
+    font-size: 0.85em;
+  }
+}
+
+// ─── Math blocks ───────────────────────────────────────────────────────────────
+.math-block {
+  margin: $space-6 0;
+  overflow-x: auto;
+  padding: $space-4;
+  background-color: var(--bg-secondary);
+  border-radius: $radius-md;
+  border: 1px solid var(--border-light);
+  text-align: center;
+}
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+}

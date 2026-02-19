@@ -1,0 +1,67 @@
+{{ define "main" }}
+<div class="layout">
+  {{/* Left sidebar */}}
+  {{ partial "sidebar.html" . }}
+
+  <main class="main-content">
+    <div class="section-header">
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+      {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+    </div>
+
+    {{/* Group by series if available, otherwise list by date */}}
+    {{- $bySeriesMap := dict -}}
+    {{- $noSeries := slice -}}
+    {{- range .Pages.ByDate.Reverse -}}
+      {{- $series := .GetTerms "series" -}}
+      {{- if $series -}}
+        {{- $sName := (index $series 0).LinkTitle -}}
+        {{- $existing := index $bySeriesMap $sName | default slice -}}
+        {{- $bySeriesMap = merge $bySeriesMap (dict $sName ($existing | append .)) -}}
+      {{- else -}}
+        {{- $noSeries = $noSeries | append . -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{/* Series groups */}}
+    {{- range $seriesName, $pages := $bySeriesMap -}}
+    <div class="post-group">
+      <div class="post-group__label">{{ $seriesName }}</div>
+      <div class="post-list">
+        {{- range $pages -}}
+        <a href="{{ .RelPermalink }}" class="post-card">
+          <div>
+            <div class="post-card__title">{{ .LinkTitle }}</div>
+            {{ with .Description }}<div class="post-card__summary">{{ . }}</div>{{ end }}
+          </div>
+          <div class="post-card__date">{{ .Date | time.Format "Jan 2006" }}</div>
+        </a>
+        {{- end -}}
+      </div>
+    </div>
+    {{- end -}}
+
+    {{/* Ungrouped posts */}}
+    {{- with $noSeries -}}
+    <div class="post-group">
+      {{ if $bySeriesMap }}<div class="post-group__label">Other</div>{{ end }}
+      <div class="post-list">
+        {{- range . -}}
+        <a href="{{ .RelPermalink }}" class="post-card">
+          <div>
+            <div class="post-card__title">{{ .LinkTitle }}</div>
+            {{ with .Description }}<div class="post-card__summary">{{ . }}</div>{{ end }}
+          </div>
+          <div class="post-card__date">{{ .Date | time.Format "Jan 2006" }}</div>
+        </a>
+        {{- end -}}
+      </div>
+    </div>
+    {{- end -}}
+  </main>
+
+  {{/* No TOC on section lists */}}
+  <div class="toc-aside"></div>
+</div>
+{{ end }}

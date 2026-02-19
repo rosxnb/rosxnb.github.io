@@ -1,0 +1,19 @@
+{{ define "main" }}
+<div class="layout layout--full">
+  <main class="main-content">
+    <div class="section-header">
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+    </div>
+
+    <div class="taxonomy-grid">
+      {{ range .Pages.ByTitle }}
+      <a href="{{ .RelPermalink }}" class="taxonomy-card">
+        {{ .LinkTitle }}
+        <span class="taxonomy-card__count">{{ len .Pages }}</span>
+      </a>
+      {{ end }}
+    </div>
+  </main>
+</div>
+{{ end }}

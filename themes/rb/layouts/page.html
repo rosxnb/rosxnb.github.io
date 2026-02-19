@@ -1,0 +1,46 @@
+{{ define "main" }}
+<div class="layout">
+  {{/* Left sidebar */}}
+  {{ partial "sidebar.html" . }}
+
+  {{/* Main article content */}}
+  <main class="main-content">
+    <article>
+      <header class="article-header">
+        {{ with .CurrentSection }}
+        <div class="article-section-label">
+          <a href="{{ .RelPermalink }}" style="color: inherit; text-decoration: none;">{{ .LinkTitle }}</a>
+        </div>
+        {{ end }}
+        <h1 class="article-title">{{ .Title }}</h1>
+        <div class="article-meta">
+          <span class="article-meta__date">
+            <time datetime="{{ .Date | time.Format `2006-01-02` }}">{{ .Date | time.Format ":date_long" }}</time>
+          </span>
+          {{ if .ReadingTime }}
+          <span class="article-meta__separator">·</span>
+          <span class="article-meta__reading-time">{{ .ReadingTime }} min read</span>
+          {{ end }}
+        </div>
+      </header>
+
+      {{/* Series navigation (before content) */}}
+      {{ partial "series-nav.html" . }}
+
+      {{/* Main content */}}
+      <div class="prose">
+        {{ .Content }}
+      </div>
+
+      {{/* Article footer */}}
+      <footer class="article-footer">
+        {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+        {{ partial "terms.html" (dict "taxonomy" "categories" "page" .) }}
+      </footer>
+    </article>
+  </main>
+
+  {{/* Right TOC */}}
+  {{ partial "toc.html" . }}
+</div>
+{{ end }}

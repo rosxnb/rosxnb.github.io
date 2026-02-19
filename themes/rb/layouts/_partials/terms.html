@@ -1,0 +1,15 @@
+{{/*
+Renders taxonomy terms (tags, categories) for a page.
+@context page  The current page
+@context taxonomy  The taxonomy name (e.g. "tags")
+*/}}
+{{- $page := .page -}}
+{{- $taxonomy := .taxonomy -}}
+{{- with $page.GetTerms $taxonomy -}}
+<div class="article-tags">
+  <span class="article-tags__label">{{ $taxonomy | title }}:</span>
+  {{- range . -}}
+  <a href="{{ .RelPermalink }}" class="tag">{{ .LinkTitle }}</a>
+  {{- end -}}
+</div>
+{{- end -}}

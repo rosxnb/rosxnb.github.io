@@ -1,0 +1,42 @@
+{{/*
+Renders the left sidebar with:
+  - Current section's pages list
+  - All top-level sections as quick links
+@context page The current page
+*/}}
+{{- $currentPage := . -}}
+{{- $section := .CurrentSection -}}
+
+<aside class="sidebar" id="sidebar" aria-label="Section navigation">
+  {{/* If we're inside a section, show its pages */}}
+  {{ if not .IsHome }}
+  <div class="sidebar__section">
+    <div class="sidebar__title">{{ $section.Title | default "Contents" }}</div>
+    <ul class="sidebar__nav">
+      {{- range $section.Pages.ByTitle -}}
+      <li class="sidebar__nav-item">
+        <a href="{{ .RelPermalink }}"
+           class="{{ if eq . $currentPage }}active{{ end }}">
+          {{ .LinkTitle }}
+        </a>
+      </li>
+      {{- end -}}
+    </ul>
+  </div>
+  {{ end }}
+
+  {{/* Top-level sections */}}
+  <div class="sidebar__section">
+    <div class="sidebar__title">Sections</div>
+    <ul class="sidebar__nav">
+      {{ range site.Sections }}
+      <li class="sidebar__nav-item">
+        <a href="{{ .RelPermalink }}"
+           class="{{ if or (eq .RelPermalink $currentPage.RelPermalink) (.IsAncestor $currentPage) }}active{{ end }}">
+          {{ .LinkTitle }}
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+</aside>

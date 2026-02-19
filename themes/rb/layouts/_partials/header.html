@@ -1,0 +1,48 @@
+<div class="site-header__inner">
+  {{/* Logo */}}
+  <a href="{{ "/" | relURL }}" class="site-logo">
+    <span class="site-logo__name">{{ site.Params.username | default site.Title }}<span class="site-logo__dot">.</span></span>
+  </a>
+
+  {{/* Main nav */}}
+  <nav class="main-nav" aria-label="Main navigation">
+    {{ range site.Menus.main }}
+    <a href="{{ .URL }}"
+       class="main-nav__link{{ if $.IsMenuCurrent `main` . }} active{{ end }}"
+       {{ if $.HasMenuCurrent `main` . }}aria-current="true"{{ end }}>
+      {{ .Name }}
+    </a>
+    {{ end }}
+  </nav>
+
+  {{/* Controls */}}
+  <div class="header-controls">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+      {{/* Moon icon (shown in light mode to switch to dark) */}}
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+      </svg>
+      {{/* Sun icon (shown in dark mode to switch to light) */}}
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    {{/* Mobile sidebar toggle */}}
+    <button class="mobile-menu-btn" id="mobileSidebarBtn" aria-label="Toggle sidebar" aria-expanded="false">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</div>

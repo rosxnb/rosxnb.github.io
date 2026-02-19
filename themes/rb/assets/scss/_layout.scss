@@ -1,0 +1,203 @@
+// ─── Page shell ────────────────────────────────────────────────────────────────
+.page-wrapper {
+  padding-top: $header-height;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// ─── Three-column layout ───────────────────────────────────────────────────────
+.layout {
+  display: grid;
+  grid-template-columns: $sidebar-width 1fr $toc-width;
+  grid-template-areas: "sidebar main toc";
+  gap: 0;
+  max-width: $page-max;
+  margin: 0 auto;
+  width: 100%;
+  flex: 1;
+  align-items: start;
+
+  @media (max-width: $bp-xl) {
+    grid-template-columns: $sidebar-width 1fr;
+    grid-template-areas: "sidebar main";
+  }
+
+  @media (max-width: $bp-lg) {
+    grid-template-columns: 1fr;
+    grid-template-areas: "main";
+  }
+}
+
+// ─── Left sidebar ──────────────────────────────────────────────────────────────
+.sidebar {
+  grid-area: sidebar;
+  position: sticky;
+  top: $header-height;
+  height: calc(100vh - #{$header-height});
+  overflow-y: auto;
+  padding: $space-6 $space-4 $space-8;
+  border-right: 1px solid var(--border);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+
+  @media (max-width: $bp-lg) {
+    display: none;
+    position: fixed;
+    top: $header-height;
+    left: 0;
+    width: $sidebar-width;
+    height: calc(100vh - #{$header-height});
+    background-color: var(--bg);
+    z-index: 100;
+    box-shadow: var(--shadow-md);
+    padding: $space-6 $space-4;
+
+    &.is-open {
+      display: block;
+    }
+  }
+}
+
+.sidebar__title {
+  font-size: $font-size-xs;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+  padding: $space-2 $space-3;
+  margin-bottom: $space-2;
+}
+
+.sidebar__section {
+  margin-bottom: $space-5;
+}
+
+.sidebar__nav {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar__nav-item {
+  margin-bottom: 0;
+
+  a {
+    display: block;
+    padding: $space-2 $space-3;
+    font-size: $font-size-sm;
+    color: var(--text-secondary);
+    border-radius: $radius-sm;
+    transition: background-color 0.15s, color 0.15s;
+    line-height: 1.4;
+
+    &:hover {
+      background-color: var(--bg-secondary);
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    &.active {
+      background-color: var(--accent-muted);
+      color: var(--accent);
+      font-weight: 500;
+    }
+  }
+}
+
+// ─── Main content area ─────────────────────────────────────────────────────────
+.main-content {
+  grid-area: main;
+  min-width: 0;
+  padding: $space-10 $space-8;
+  max-width: $content-max + $space-16;
+
+  @media (max-width: $bp-md) {
+    padding: $space-6 $space-4;
+  }
+}
+
+// ─── Right TOC ─────────────────────────────────────────────────────────────────
+.toc-aside {
+  grid-area: toc;
+  position: sticky;
+  top: $header-height;
+  height: calc(100vh - #{$header-height});
+  overflow-y: auto;
+  padding: $space-8 $space-5 $space-8 $space-4;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+
+  @media (max-width: $bp-xl) {
+    display: none;
+  }
+}
+
+// ─── No-sidebar layout (home, taxonomy, etc.) ──────────────────────────────────
+.layout--full {
+  grid-template-columns: 1fr;
+  grid-template-areas: "main";
+
+  .main-content {
+    max-width: $page-max;
+    padding: $space-10 $space-12;
+
+    @media (max-width: $bp-md) {
+      padding: $space-6 $space-4;
+    }
+  }
+}
+
+// ─── Content width limiter inside main ─────────────────────────────────────────
+.prose {
+  max-width: $content-max;
+}
+
+// ─── Page footer ───────────────────────────────────────────────────────────────
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: $space-6 $space-8;
+  color: var(--text-tertiary);
+  font-size: $font-size-sm;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $space-4;
+  flex-wrap: wrap;
+
+  @media (max-width: $bp-md) {
+    padding: $space-4;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  a {
+    color: var(--text-tertiary);
+    &:hover { color: var(--accent); }
+  }
+}
+
+.footer__links {
+  display: flex;
+  gap: $space-5;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li { margin: 0; }
+}
+
+// ─── Mobile sidebar overlay ────────────────────────────────────────────────────
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  top: $header-height;
+  background: rgba(0,0,0,0.4);
+  z-index: 99;
+
+  @media (max-width: $bp-lg) {
+    &.is-open {
+      display: block;
+    }
+  }
+}
