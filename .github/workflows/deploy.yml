@@ -1,4 +1,4 @@
-name: Deploy Hugo site to GitHub Pages
+name: Deploy site to GitHub Pages
 
 on:
   push:
@@ -25,7 +25,10 @@ jobs:
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: "latest"
-          extended: true   # required for dart sass / SCSS
+          extended: true
+
+      - name: Setup Dart Sass
+        run: sudo snap install dart-sass
 
       - name: Build
         run: hugo --minify
