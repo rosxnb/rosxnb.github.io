@@ -11,7 +11,7 @@
       <a href="{{ .RelPermalink }}" class="post-card">
         <div>
           <div class="post-card__title">{{ .LinkTitle }}</div>
-          {{ with .Summary }}<div class="post-card__summary">{{ . | truncate 110 }}</div>{{ end }}
+          {{ with .Description }}<div class="post-card__summary">{{ . }}</div>{{ end }}
         </div>
         <div class="post-card__date">{{ .Date | time.Format "Jan 2006" }}</div>
       </a>

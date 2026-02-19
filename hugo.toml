@@ -30,11 +30,6 @@ ignoreLogs = [
     [markup.goldmark]
         [markup.goldmark.renderer]
             unsafe = true   # Allow raw HTML in markdown (needed for KaTeX, etc.)
-        [markup.goldmark.extensions.passthrough]
-            enable = true
-            [markup.goldmark.extensions.passthrough.delimiters]
-                block  = [["$$", "$$"], ["\\[", "\\]"]]
-                inline = [["$", "$"],   ["\\(", "\\)"]]
     [markup.highlight]
         noClasses = false   # Use CSS classes (not inline styles) for Chroma
         lineNos = false
