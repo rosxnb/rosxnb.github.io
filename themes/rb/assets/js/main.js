@@ -141,3 +141,59 @@ document.addEventListener('DOMContentLoaded', function () {
     wrapper.appendChild(block);
   });
 });
+
+// ─── Search overlay ────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function () {
+  var overlay   = document.getElementById('searchOverlay');
+  var trigger   = document.getElementById('searchTrigger');
+  if (!overlay) return;
+
+  var pagefindInitialised = false;
+
+  function openSearch() {
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    // Initialise Pagefind UI once
+    if (!pagefindInitialised && window.PagefindUI) {
+      new PagefindUI({
+        element: '#search',
+        showSubResults: true,
+        showImages: false,
+        resetStyles: false,
+      });
+      pagefindInitialised = true;
+    }
+
+    // Auto-focus the input after short delay (lets animation settle)
+    setTimeout(function () {
+      var input = overlay.querySelector('.pagefind-ui__search-input');
+      if (input) input.focus();
+    }, 50);
+  }
+
+  function closeSearch() {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  // Open on "/" keypress (unless user is typing in an input)
+  document.addEventListener('keydown', function (e) {
+    if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+      e.preventDefault();
+      openSearch();
+    }
+    if (e.key === 'Escape') {
+      closeSearch();
+    }
+  });
+
+  if (trigger) trigger.addEventListener('click', openSearch);
+
+  // Click outside modal to close
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeSearch();
+  });
+});

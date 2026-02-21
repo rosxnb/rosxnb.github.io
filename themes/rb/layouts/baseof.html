@@ -22,6 +22,18 @@
       </ul>
     </footer>
 
+    <!-- Search overlay -->
+    <div class="search-overlay" id="searchOverlay" aria-hidden="true">
+      <div class="search-modal" role="dialog" aria-label="Search">
+        <div class="search-modal__header">
+          <div id="search"></div>
+        </div>
+      </div>
+    </div>
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+    <script src="/pagefind/pagefind-ui.js"></script>
+
+
     {{/* Mermaid */}}
     {{ if .Store.Get "hasMermaid" }}
     <script type="module">
@@ -29,6 +41,8 @@
       mermaid.initialize({ startOnLoad: true, theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default' });
     </script>
     {{ end }}
+
+
   </div>
 </body>
 </html>

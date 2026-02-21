@@ -1,0 +1,22 @@
+{{ define "main" }}
+<div class="layout layout--full">
+  <main class="main-content">
+    <div class="section-header">
+      <h1>Search</h1>
+      <p>Search across all notes, posts, and ideas.</p>
+    </div>
+
+    <div id="search"></div>
+
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+    <script src="/pagefind/pagefind-ui.js"></script>
+    <script>
+      new PagefindUI({
+        element: "#search",
+        showSubResults: true,
+        showImages: false,
+      });
+    </script>
+  </main>
+</div>
+{{ end }}

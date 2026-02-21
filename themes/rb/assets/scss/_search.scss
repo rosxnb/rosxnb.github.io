@@ -1,0 +1,180 @@
+// ─── Search overlay ────────────────────────────────────────────────────────────
+.search-trigger {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-1 $space-3;
+  border: 1px solid var(--border);
+  border-radius: $radius-md;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  font-size: $font-size-sm;
+  transition: all 0.15s;
+
+  &:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text);
+  }
+}
+
+.search-trigger__hint {
+  font-family: $font-mono;
+  font-size: $font-size-xs;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--text-tertiary);
+  background-color: var(--bg-secondary);
+}
+
+#search {
+  width: 100% !important;
+}
+
+// ─── Overlay backdrop ──────────────────────────────────────────────────────────
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: $z-search;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10vh;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+
+  &.is-open {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+// ─── Modal box ─────────────────────────────────────────────────────────────────
+.search-modal {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 $space-4;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: $radius-xl;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transform: translateY(-8px);
+  transition: transform 0.15s ease;
+
+  .search-overlay.is-open & {
+    transform: translateY(0);
+  }
+}
+
+.search-modal__header {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2;
+}
+
+.search-modal__close {
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 2px $space-2;
+  font-size: $font-size-xs;
+  font-family: $font-mono;
+
+  &:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text);
+  }
+}
+
+// ─── Pagefind UI overrides ─────────────────────────────────────────────────────
+// Force Pagefind's UI to match our theme
+.search-overlay {
+  --pagefind-ui-scale: 0.9;
+  --pagefind-ui-primary: var(--accent);
+  --pagefind-ui-text: var(--text);
+  --pagefind-ui-background: var(--bg-elevated);
+  --pagefind-ui-border: var(--border);
+  --pagefind-ui-tag: var(--bg-tertiary);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 8px;
+  --pagefind-ui-font: system-ui, sans-serif;
+
+  // Remove Pagefind's outer container padding
+  .pagefind-ui {
+    width: 100%;
+  }
+
+  // Make the input look native to our theme
+  .pagefind-ui__search-input {
+    background: var(--bg-elevated) !important;
+    color: var(--text) !important;
+    border-color: transparent !important;
+    border-radius: 0 !important;
+    font-size: 16px !important;
+    padding: $space-3 $space-4 !important;
+    padding-left: 52px !important;
+
+    &:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+  }
+
+  .pagefind-ui__message {
+    color: var(--text-tertiary) !important;
+    font-size: $font-size-xs !important;
+    padding: $space-2 $space-5 !important;
+    border-bottom: 1px solid var(--border-light) !important;
+
+    // Color just the count number
+    strong {
+      color: var(--accent) !important;
+    }
+  }
+
+  .pagefind-ui__search-clear {
+    color: var(--text-tertiary) !important;
+    display: none !important;
+  }
+
+  // Results area
+  .pagefind-ui__results-area {
+    margin: $space-1 !important;
+    padding: $space-2 !important;
+    max-height: 60vh;
+    overflow-y: auto;
+    width: 100% !important;
+  }
+
+  .pagefind-ui__result {
+    border-top: 1px solid var(--border-light) !important;
+    padding: $space-4 $space-5 $space-4 $space-5 !important;
+  }
+
+  .pagefind-ui__result-title {
+    font-size: $font-size-sm !important;
+    font-weight: 600 !important;
+  }
+
+  .pagefind-ui__result-excerpt {
+    font-size: $font-size-xs !important;
+    color: var(--text-secondary) !important;
+  }
+
+  mark {
+    background-color: var(--accent-muted) !important;
+    color: var(--accent) !important;
+    border-radius: 2px;
+    padding: 0 2px;
+  }
+}
