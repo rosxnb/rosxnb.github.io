@@ -21,6 +21,11 @@ ignoreLogs = [
 [params.mermaid]
     enable = true
 
+[params.goatcounter]
+  # Get code from https://goatcounter.com
+  # Example: if URL is "mysite.goatcounter.com", code is "mysite"
+  code = ""
+
 [taxonomies]
     tag = "tags"
     category = "categories"
