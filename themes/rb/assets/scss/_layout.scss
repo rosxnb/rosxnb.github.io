@@ -12,7 +12,7 @@
   grid-template-columns: $sidebar-width 1fr $toc-width;
   grid-template-areas: "sidebar main toc";
   gap: 0;
-  max-width: $page-max;
+  max-width: min(#{$page-max}, 96vw);
   margin: 0 auto;
   width: 100%;
   flex: 1;
@@ -109,7 +109,7 @@
   grid-area: main;
   min-width: 0;
   padding: $space-10 $space-8;
-  max-width: $content-max + $space-16;
+  max-width: min(#{$content-max + $space-20}, 90vw);
 
   @media (max-width: $bp-md) {
     padding: $space-6 $space-4;
