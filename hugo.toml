@@ -8,7 +8,8 @@ ignoreLogs = [
 ]
 
 [params]
-    description = "Low Level Performance Oriented System Engineer | AI Researcher"
+    # description = "Low Level Performance Oriented System Engineer | AI Researcher"
+    description = "C++ Developer | AI Researcher"
     author = "Roshan Bharati"
     username = "rosxnb"
     github = "https://github.com/rosxnb"

@@ -1,6 +1,6 @@
 +++
 title = "Unfiltered Thoughts"
-date = 2026-02-01T00:43:39+05:45
+date = 2026-02-22T00:43:39+05:45
 tags = []
 description = "List of raw ideas"
 +++
