@@ -94,11 +94,13 @@ $$
 
 ## Height vs Number of Nodes
 
-Height = number of edges in the longest root-to-leaf path.
+Following calculations apply to normal binary trees and implicitly to strict binary trees as well.
+The binary tree don't have to be strict. Analysis of a strict binary tree can be derived looking at
+[Analysis of Strict N-ary Tree]({{< relref "general-tree.md#analysis-of-strict-n-ary-tree" >}}).
 
 ---
 
-### Given Height $h$
+### Given height $h$, Find #nodes $n$ in the binary tree
 
 For a binary tree of height $h$:
 
@@ -120,7 +122,7 @@ $$
 
 ---
 
-### Given Number of Nodes $n$
+### Given #nodes $n$, Find $h$ of binary tree
 
 For a binary tree with $n$ nodes:
 

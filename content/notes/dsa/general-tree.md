@@ -47,11 +47,13 @@ relations. Hence, strict trees are easier to analyze and commonly studied.
 
 ### Given Height $h$
 
-(Height = number of edges on the longest path from root to leaf)
+Given height of a strict N-ary tree,  
+_what is the minimum #nodes it can have?_  
+_what is the maximum #nodes it can have?_
 
 #### Minimum Number of Nodes
 
-To achieve height $h$, we must extend one branch fully.
+To achieve height $h$ with minimum #nodes, we must extend one branch fully.
 
 Since every internal node must have exactly $N$ children:
 
@@ -100,6 +102,10 @@ $$
 ---
 
 ### Given Number of Nodes $n$
+
+Given #nodes of a strict N-ary tree,  
+_what is the minimum height it can have?_  
+_what is the maximum height it can have?_
 
 #### Minimum Height
 

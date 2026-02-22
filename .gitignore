@@ -33,3 +33,7 @@ yarn.lock
 # Environment files (if you store sensitive config)
 .env
 *.local
+
+# C++
+/static/codefiles/**/out
+/static/codefiles/**/*.out
