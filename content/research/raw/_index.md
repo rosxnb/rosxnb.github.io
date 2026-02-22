@@ -1,4 +1,4 @@
 +++
-title = "Ideas and Curiosity"
-description = "Raw unfiltered ideas"
+title = "Curiosity and Ideas "
+description = "Raw unfiltered curios ideas list"
 +++
