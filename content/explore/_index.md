@@ -1,7 +1,7 @@
 +++
 icon = "⚙️"
 title = "Explore"
-description = "Programming topics ranging from performace, algorithms, bit tricks, ..." 
-contentLabel = "experiments"
+description = "Hands-on IT deep-dives and explorations. Things that piqued my geeky interest - and I actually had the time to follow through." 
+contentLabel = "categories"
 weight = 2
 +++

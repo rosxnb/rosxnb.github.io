@@ -1,7 +1,7 @@
 +++
 icon = "🔬"
 title = "Research"
-description = "Updates and notes from my master's research in AI and systems."
-contentLabel = "findings"
+description = "My research and ideas — finished, brewing, or just daydreams. All living here."
+contentLabel = "publications"
 weight = 4
 +++
