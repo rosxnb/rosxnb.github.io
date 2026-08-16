@@ -1,0 +1,30 @@
+{{/*
+Usage: {{< fold summary="Why does this hold?" >}}
+Markdown body, revealed on click.
+{{< /fold >}}
+
+summary: label on the collapsed row (positional arg 0 also works), default "More"
+open:    "true" to render expanded
+*/}}
+{{- $summary := or (.Get "summary") (.Get 0) "More" -}}
+{{- $open := eq (.Get "open" | default "false") "true" -}}
+
+{{- /* Strip the common leading indent so folds can be nested inside list items. */ -}}
+{{- $inner := .Inner -}}
+{{- $indent := "" -}}
+{{- $found := false -}}
+{{- range (split $inner "\n") -}}
+  {{- $bare := strings.TrimLeft " \t" . -}}
+  {{- if and (not $found) (ne $bare "") -}}
+    {{- $indent = substr . 0 (sub (len .) (len $bare)) -}}
+    {{- $found = true -}}
+  {{- end -}}
+{{- end -}}
+{{- with $indent }}{{ $inner = replaceRE (printf "(?m)^%s" .) "" $inner }}{{ end -}}
+
+<details class="fold"{{ if $open }} open{{ end }}>
+  <summary class="fold__summary"><span class="fold__label">{{ $summary | markdownify }}</span></summary>
+  <div class="fold__body">
+    {{ .Page.RenderString (dict "display" "block") $inner }}
+  </div>
+</details>

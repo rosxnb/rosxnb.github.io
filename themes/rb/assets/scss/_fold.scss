@@ -1,0 +1,89 @@
+// ─── Fold / collapsible detail ────────────────────────────────────────────────
+.fold {
+  margin: $space-5 0;
+}
+
+.fold__summary {
+  position: relative;
+  padding-left: $space-5;
+  font-size: $font-size-sm;
+  line-height: 1.5;
+  color: var(--accent);
+  cursor: pointer;
+  user-select: none;
+  list-style: none;               // Firefox: drop the native disclosure triangle
+  &::-webkit-details-marker { display: none; }
+
+  // Triangle marker, rotated 90° when open
+  &::before {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 0.75em;                  // half of line-height → vertically centred on line 1
+    width: 0;
+    height: 0;
+    border: 4px solid transparent;
+    border-left-color: currentColor;
+    transform: translateY(-50%);
+    transition: transform 0.15s ease;
+  }
+
+  &:hover {
+    color: var(--accent-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: $radius-sm;
+  }
+}
+
+.fold[open] > .fold__summary::before {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.fold__label {
+  border-bottom: 1px dashed currentColor;
+  padding-bottom: 1px;
+}
+
+.fold__body {
+  margin-top: $space-3;
+  padding-left: $space-5;
+  font-size: $font-size-sm;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  animation: fold-reveal 0.18s ease-out;
+
+  p, ul, ol, li {
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+  }
+
+  p { margin-bottom: $space-3; }
+  ul, ol { margin-bottom: $space-3; }
+  li { margin-bottom: $space-1; }
+
+  code:not(pre code) { font-size: 0.85em; }
+
+  > :last-child { margin-bottom: 0; }
+}
+
+@keyframes fold-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+}
+
+// Tighter when folded into a list item
+.prose li > .fold {
+  margin: $space-3 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fold__summary::before { transition: none; }
+  .fold__body { animation: none; }
+}
