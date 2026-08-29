@@ -36,6 +36,14 @@ ignoreLogs = [
     [markup.goldmark]
         [markup.goldmark.renderer]
             unsafe = true   # Allow raw HTML in markdown (needed for KaTeX, etc.)
+        # Hand math to KaTeX untouched. Without this, Goldmark eats backslash
+        # escapes (\; \, \!) and turns `)_{...}` into <em> inside formulas.
+        # Delimiters must match those in themes/rb/layouts/_partials/head/math.html
+        [markup.goldmark.extensions.passthrough]
+            enable = true
+            [markup.goldmark.extensions.passthrough.delimiters]
+                block  = [['$$', '$$'], ['\[', '\]']]
+                inline = [['$', '$'], ['\(', '\)']]
     [markup.highlight]
         noClasses = false   # Use CSS classes (not inline styles) for Chroma
         lineNos = false

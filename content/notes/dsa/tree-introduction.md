@@ -34,18 +34,18 @@ graph TD
   Node $A$ is the root of the above tree.
 
 - **Parent**: A node $m$ is the parent of nodes $n_i$ if there are edges from $m$ to each $n_i$.  
-  Node $D$ is the parent of nodes $\\{G, H, I\\}$.
+  Node $D$ is the parent of nodes $\{G, H, I\}$.
 
 - **Child**: A node $n$ is a child of node $m$ if there is an edge from $m$ to $n$.
 
-- **Siblings**: Nodes $\\{n_i\\}$ are siblings if they share the same parent node $m$.  
-  For example, $\\{G, H, I\\}$ are siblings.
+- **Siblings**: Nodes $\{n_i\}$ are siblings if they share the same parent node $m$.  
+  For example, $\{G, H, I\}$ are siblings.
 
 - **Descendants**: All nodes that can be reached from a given node by following downward edges (recursively).  
-  Nodes $\\{J, K, M\\}$ are descendants of node $F$.
+  Nodes $\{J, K, M\}$ are descendants of node $F$.
 
 - **Ancestors**: All nodes on the path from a given node to the root (excluding the node itself).  
-  For example, ancestors of $M$ are $\\{J, F, B, A\\}$.
+  For example, ancestors of $M$ are $\{J, F, B, A\}$.
 
 - **Degree of a Node**: The number of children of that node (i.e., number of outgoing edges).  
   Degree of node $D$ is $3$.  
@@ -55,10 +55,10 @@ graph TD
   Binary Tree has degree $2$ (i.e., each node in the tree has degree $\leq 2$).
 
 - **Internal Node**: A node with at least one child (degree $\geq 1$).  
-  Nodes $\\{A, B, D, F, H, J, L\\}$ are internal nodes.
+  Nodes $\{A, B, D, F, H, J, L\}$ are internal nodes.
 
 - **External Node (Leaf Node)**: A node with no children (degree $0$).  
-  Nodes $\\{C, E, G, I, K, M, N, O\\}$ are leaf nodes.
+  Nodes $\{C, E, G, I, K, M, N, O\}$ are leaf nodes.
 
 - **Level**: The level of a node is defined as the number of edges from the root to that node.  
   Root is at level $0$.  

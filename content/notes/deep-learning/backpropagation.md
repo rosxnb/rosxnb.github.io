@@ -35,6 +35,7 @@ $$z^{(l)},\quad a^{(l)} \text{ for all } l$$
 
 **Backward pass** — compute deltas:
 $$\delta^{(L)} = \nabla_{a^{(L)}} \mathcal{L} \odot \sigma'(z^{(L)})$$
+
 $$\delta^{(l)} = \left((W^{(l+1)})^\top \delta^{(l+1)}\right) \odot \sigma'(z^{(l)})$$
 
 **Gradients:**
