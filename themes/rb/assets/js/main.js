@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
     return;
   }
 
-  // Keep in sync with $bp-xl in assets/scss/_variables.scss.
-  var minimized = window.matchMedia('(max-width: 1280px)');
+  // Keep in sync with $bp-sidebar in assets/scss/_variables.scss.
+  var minimized = window.matchMedia('(max-width: 1440px)');
 
   function isOpen() { return sidebar.classList.contains('is-open'); }
 

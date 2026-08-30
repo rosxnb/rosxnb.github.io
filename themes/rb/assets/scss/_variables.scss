@@ -26,13 +26,14 @@ $space-10: 40px;
 $space-12: 48px;
 $space-16: 64px;
 $space-20: 80px;
+$space-24: 96px;
 
 // ─── Layout ────────────────────────────────────────────────────────────────────
 $header-height:   56px;
-$sidebar-width:   240px;
-$toc-width:       220px;
-$content-max:     900px;
-$page-max:        1400px;
+$sidebar-width:   260px;
+$toc-width:       240px;
+$content-max:     1040px;
+$page-max:        1760px;
 
 // ─── Border radius ─────────────────────────────────────────────────────────────
 $radius-sm:   4px;
@@ -45,6 +46,15 @@ $bp-sm:   640px;
 $bp-md:   768px;
 $bp-lg:   1024px;
 $bp-xl:   1280px;
+
+// ─── Layout thresholds ─────────────────────────────────────────────────────────
+// These come from the column arithmetic above, not from device sizes: a rail
+// steps out at the width where keeping it would leave the text too narrow to
+// read. Three columns need roughly $content-max minus a third plus both rails
+// and their gutters, so the sidebar has to go well before the usual 1280px
+// tablet breakpoint. Keep $bp-sidebar in sync with assets/js/main.js.
+$bp-sidebar: 1440px;   // below this the sidebar leaves the grid
+$bp-toc:     1120px;   // below this the TOC leaves the page
 
 // ─── Search ────────────────────────────────────────────────────────────────────
 $z-search: 500;

@@ -23,7 +23,8 @@
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  max-width: $page-max;
+  // Same clamp as .layout so the logo lines up with the sidebar rail.
+  max-width: min(#{$page-max}, 96vw);
   margin: 0 auto;
   padding: 0 $space-6;
   gap: $space-4;
@@ -160,7 +161,7 @@
     .icon-close { display: block; }
   }
 
-  @media (max-width: $bp-xl) {
+  @media (max-width: $bp-sidebar) {
     display: flex;
   }
 
