@@ -126,8 +126,8 @@
   }
 }
 
-// ─── Mobile menu button ────────────────────────────────────────────────────────
-.mobile-menu-btn {
+// ─── Sidebar toggle (appears once the sidebar minimizes) ───────────────────────
+.sidebar-toggle {
   display: none;
   align-items: center;
   justify-content: center;
@@ -151,7 +151,19 @@
     stroke-linecap: round;
   }
 
-  @media (max-width: $bp-lg) {
+  .icon-close { display: none; }
+
+  &[aria-expanded="true"] {
+    background-color: var(--bg-secondary);
+    color: var(--text);
+    .icon-menu  { display: none; }
+    .icon-close { display: block; }
+  }
+
+  @media (max-width: $bp-xl) {
     display: flex;
   }
+
+  // Pages without a sidebar hide the toggle outright.
+  &[hidden] { display: none; }
 }

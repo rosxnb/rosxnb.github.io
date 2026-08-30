@@ -28,28 +28,84 @@
   });
 })();
 
-// ─── Mobile sidebar ────────────────────────────────────────────────────────────
+// ─── Sidebar: auto-minimize on narrow viewports, expand as an overlay ─────────
 document.addEventListener('DOMContentLoaded', function () {
   var sidebar = document.getElementById('sidebar');
   var overlay = document.getElementById('sidebarOverlay');
-  var btn = document.getElementById('mobileSidebarBtn');
-  if (!sidebar || !overlay || !btn) return;
+  var btn     = document.getElementById('sidebarToggle');
+  if (!btn) return;
+
+  // Layouts like home/taxonomy render no sidebar at all — nothing to toggle.
+  if (!sidebar || !overlay) {
+    btn.hidden = true;
+    return;
+  }
+
+  // Keep in sync with $bp-xl in assets/scss/_variables.scss.
+  var minimized = window.matchMedia('(max-width: 1280px)');
+
+  function isOpen() { return sidebar.classList.contains('is-open'); }
+
+  // Off-screen panels stay out of the tab order and the accessibility tree.
+  function syncInert() {
+    if (minimized.matches && !isOpen()) sidebar.setAttribute('inert', '');
+    else sidebar.removeAttribute('inert');
+  }
+
+  // Everything the expanded panel covers is unreachable while it is open, so
+  // keyboard focus should not wander back there either.
+  var covered = document.querySelectorAll('.main-content, .toc-aside, .site-footer');
+
+  function setCoveredInert(on) {
+    covered.forEach(function (el) {
+      if (on) el.setAttribute('inert', '');
+      else el.removeAttribute('inert');
+    });
+  }
 
   function openSidebar() {
     sidebar.classList.add('is-open');
     overlay.classList.add('is-open');
     btn.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('is-sidebar-open');
+    syncInert();
+    setCoveredInert(true);
+    sidebar.focus({ preventScroll: true });
   }
-  function closeSidebar() {
+
+  function closeSidebar(returnFocus) {
+    // Focus must never be left stranded inside the panel we are about to hide.
+    var heldFocus = sidebar.contains(document.activeElement);
     sidebar.classList.remove('is-open');
     overlay.classList.remove('is-open');
     btn.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('is-sidebar-open');
+    syncInert();
+    setCoveredInert(false);
+    if (returnFocus || heldFocus) btn.focus({ preventScroll: true });
   }
 
   btn.addEventListener('click', function () {
-    sidebar.classList.contains('is-open') ? closeSidebar() : openSidebar();
+    isOpen() ? closeSidebar(false) : openSidebar();
   });
-  overlay.addEventListener('click', closeSidebar);
+  overlay.addEventListener('click', function () { closeSidebar(false); });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && isOpen()) closeSidebar(true);
+  });
+
+  // Following a link hands the viewport back to the content.
+  sidebar.addEventListener('click', function (e) {
+    if (isOpen() && e.target.closest('a')) closeSidebar(false);
+  });
+
+  // Widening the window re-pins the sidebar — drop the overlay state with it.
+  minimized.addEventListener('change', function () {
+    if (!minimized.matches) closeSidebar(false);
+    else syncInert();
+  });
+
+  syncInert();
 });
 
 // ─── TOC: active link + reading progress ──────────────────────────────────────

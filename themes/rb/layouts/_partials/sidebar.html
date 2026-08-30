@@ -7,7 +7,8 @@ Renders the left sidebar with:
 {{- $currentPage := . -}}
 {{- $section := .CurrentSection -}}
 
-<aside class="sidebar" id="sidebar" aria-label="Section navigation">
+{{/* tabindex lets the expanded overlay take focus without landing on a nav link */}}
+<aside class="sidebar" id="sidebar" aria-label="Section navigation" tabindex="-1">
   {{/* If we're inside a section, show its pages */}}
   {{ if not .IsHome }}
   <div class="sidebar__section">

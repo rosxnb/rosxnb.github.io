@@ -18,9 +18,11 @@
   flex: 1;
   align-items: start;
 
+  // The sidebar yields its column before the TOC does — on a narrow screen the
+  // page you are reading matters more than the section you found it in.
   @media (max-width: $bp-xl) {
-    grid-template-columns: $sidebar-width 1fr;
-    grid-template-areas: "sidebar main";
+    grid-template-columns: 1fr $toc-width;
+    grid-template-areas: "main toc";
   }
 
   @media (max-width: $bp-lg) {
@@ -30,31 +32,40 @@
 }
 
 // ─── Left sidebar ──────────────────────────────────────────────────────────────
+// Below $bp-xl the sidebar minimizes itself: it leaves the grid, parks off the
+// left edge, and slides back over the content when the header toggle asks for it.
 .sidebar {
   grid-area: sidebar;
   position: sticky;
   top: $header-height;
   height: calc(100vh - #{$header-height});
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: $space-6 $space-4 $space-8;
   border-right: 1px solid var(--border);
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 
-  @media (max-width: $bp-lg) {
-    display: none;
+  &:focus { outline: none; }
+
+  @media (max-width: $bp-xl) {
     position: fixed;
     top: $header-height;
     left: 0;
-    width: $sidebar-width;
-    height: calc(100vh - #{$header-height});
+    width: min(#{$sidebar-width + $space-8}, 82vw);
     background-color: var(--bg);
     z-index: 100;
     box-shadow: var(--shadow-md);
-    padding: $space-6 $space-4;
+    padding: $space-5 $space-4 $space-10;
+
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition: transform 0.22s ease, visibility 0s linear 0.22s;
 
     &.is-open {
-      display: block;
+      transform: translateX(0);
+      visibility: visible;
+      transition: transform 0.22s ease;
     }
   }
 }
@@ -127,7 +138,7 @@
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 
-  @media (max-width: $bp-xl) {
+  @media (max-width: $bp-lg) {
     display: none;
   }
 }
@@ -186,18 +197,35 @@
   li { margin: 0; }
 }
 
-// ─── Mobile sidebar overlay ────────────────────────────────────────────────────
+// ─── Sidebar overlay scrim ─────────────────────────────────────────────────────
 .sidebar-overlay {
-  display: none;
   position: fixed;
   inset: 0;
   top: $header-height;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.45);
   z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.22s ease, visibility 0s linear 0.22s;
 
-  @media (max-width: $bp-lg) {
+  @media (max-width: $bp-xl) {
     &.is-open {
-      display: block;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.22s ease;
     }
+  }
+}
+
+// The page must not scroll behind an expanded sidebar.
+body.is-sidebar-open {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .sidebar-overlay {
+    transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
   }
 }
