@@ -1,0 +1,9 @@
+{{/*
+Renders a ```math fenced block as KaTeX display math.
+
+KaTeX's auto-render pass skips <pre> and <code>, so the body has to leave the
+code path entirely: it is emitted as plain text wrapped in the $$ delimiters
+declared in _partials/head/math.html. Use \\ inside a \begin{aligned} block to
+break one display across several lines.
+*/}}
+<div class="math-block">$${{ trim .Inner "\n" }}$$</div>
