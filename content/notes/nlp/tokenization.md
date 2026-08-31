@@ -35,9 +35,9 @@ $$ |V| = kN^{\beta} $$
 
 where $k$ and $\beta$ are positive constants $(0 < \beta < 1)$.
 
-- **Function words** (e.g., *a*, *of*) are finite and don't grow indefinitely.
-- **Content words** (nouns, verbs, adjectives) grow without bound.
 - Because vocabulary grows endlessly, models will constantly encounter unknown words—a fatal problem for machine learning models.
+    - **Function words** (e.g., *a*, *of*) are finite and don't grow indefinitely.
+    - **Content words** (nouns, verbs, adjectives) grow without bound.
 
 ---
 
@@ -83,30 +83,6 @@ While characters are mathematically well-defined, finite, and solve the unknown-
 
 ---
 
-## Corpora
-
-Text is always produced by specific speakers, in specific contexts, and for specific purposes. When building or evaluating NLP models,
-it is crucial to account for several dimensions of linguistic variation:
-
-- **Language & Dialect:** There are over 7,000 languages, and most have multiple regional or social varieties
-  (e.g., African American Vernacular English vs. Mainstream American English).
-- **Code-Switching:** Speakers frequently mix multiple languages within a single utterance.
-- **Genre:** Text varies drastically across newswire, social media, spoken conversations, legal documents, and other genres.
-- **Demographics & Time:** The age, gender, race, and historical era of the writer can influence linguistic properties.
-
-### Datasheets for Datasets
-
-Because language is so situated, dataset creators should provide a -*datasheet** to document the context, biases, and limitations of the data.
-A standard datasheet specifies:
-
-- **Motivation:** Why, by whom, and for what purpose was the dataset collected?
-- **Situation:** When, where, and in what context was the text produced?
-- **Language & Demographics:** What languages, dialects, and speaker characteristics are represented?
-- **Collection & Annotation:** How was the data sampled, pre-processed, and annotated?
-- **Distribution:** Are there copyright, licensing, or intellectual property restrictions?
-
----
-
 ## Subword Tokenization
 
 **Subword** is a data-driven token that is smaller than a standard word but carries more semantic weight than a single character. It is typically a meaningful
@@ -122,8 +98,8 @@ part of a word, roughly corresponding to a morpheme, and can be further broken d
 
 ### Byte-Pair Encoding
 
-**Byte-Pair Encoding (BPE)** is one of the most widely used tokenization algorithms. It was initially developed as an algorithm for compressing text and was
-later adopted by OpenAI for tokenization when pre-training GPT models. It is used by several transformer models, including GPT, GPT-2, RoBERTa, BART, and DeBERTa.
+**Byte-Pair Encoding (BPE)**  was initially developed as an algorithm for compressing text and was later adopted by OpenAI for tokenization when
+pre-training GPT models. It is used by several transformer models, including GPT, GPT-2, RoBERTa, BART, and DeBERTa.
 
 BPE has two phases: **training** and **encoding/tokenizing**.
 
