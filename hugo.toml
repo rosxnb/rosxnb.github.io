@@ -15,6 +15,7 @@ ignoreLogs = [
     github = "https://github.com/rosxnb"
     linkedin = "https://linkedin.com/in/rosxnb"
     email = "rosxnb@gmail.com"
+    cv = "/cv.pdf"
 
 [params.math]
     enable = true
